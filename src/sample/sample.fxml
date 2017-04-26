@@ -50,7 +50,7 @@
                               </PasswordField>
                            </children>
                         </VBox>
-                        <Button alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#openDialog" prefHeight="45.0" prefWidth="96.0" text="Zaloguj" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                        <Button alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onKeyPressed="#openDialog" onMouseClicked="#openDialog" prefHeight="45.0" prefWidth="96.0" text="Zaloguj" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                            <GridPane.margin>
                               <Insets left="290.0" />
                            </GridPane.margin>
