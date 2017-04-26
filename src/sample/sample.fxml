@@ -35,7 +35,7 @@
                         </Label>
                         <VBox alignment="CENTER" prefHeight="159.0" prefWidth="600.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <children>
-                              <TextField alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="386.0" promptText="Login" style="-fx-background-color: green; -fx-background-radius: 50px; -fx-border-color: white;">
+                              <TextField fx:id="loginText" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="386.0" promptText="Login" style="-fx-background-color: green; -fx-background-radius: 50px; -fx-border-color: white;">
                                  <VBox.margin>
                                     <Insets bottom="10.0" />
                                  </VBox.margin>
@@ -43,7 +43,7 @@
                                     <Font size="21.0" />
                                  </font>
                               </TextField>
-                              <PasswordField alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="386.0" promptText="Hasło" style="-fx-background-color: red; -fx-background-radius: 50px;">
+                              <PasswordField fx:id="passwordText" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="386.0" promptText="Hasło" style="-fx-background-color: red; -fx-background-radius: 50px;">
                                  <font>
                                     <Font size="21.0" />
                                  </font>
@@ -55,7 +55,6 @@
                               <Insets left="290.0" />
                            </GridPane.margin>
                         </Button>
-                        <JFXSpinner fx:id="spinner" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </content>
