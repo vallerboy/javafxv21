@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.web.*?>
@@ -54,6 +55,7 @@
                               <Insets left="290.0" />
                            </GridPane.margin>
                         </Button>
+                        <JFXSpinner fx:id="spinner" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </content>
