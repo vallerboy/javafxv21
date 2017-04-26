@@ -2,7 +2,6 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -44,37 +43,40 @@ public class Controller implements Initializable {
 //    }
 
 
+    private boolean isLoginFormValid() {
+        if(loginText.getText().trim().length() < 4 || passwordText.getText().trim().length() < 4){
+            Utils.openDialog("Logowanie", "Login i hasło muszą mieć minimum 4 znaki");
+            return false;
+        }
+
+        return true;
+    }
 
 
     public void openDialog() {
+        if(!isLoginFormValid()){
+            return;
+        }
         System.out.println("Login: " + loginText.getText() + " Hasło: " + passwordText.getText());
         Statement statement = MySqlConnector.getInstance().getNewStatement();
         try {
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM user WHERE name = '" + loginText.getText()+"'");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM user WHERE name = '" + loginText.getText()+"' LIMIT 1");
 
             int counter = 0;
 
                 while (resultSet.next()) {
                     String passwordFromDatabase = resultSet.getString("password");
                     if(passwordFromDatabase.equals(passwordText.getText())){
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Logowanie");
-                        alert.setContentText("Zalogowałeś się poprawnie");
-                        alert.showAndWait();
+                        Utils.openDialog("Logowanie", "Zalogowałeś się poprawnie!");
                     }else{
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Logowanie");
-                        alert.setContentText("Błędne hasło");
-                        alert.showAndWait();
+                        Utils.openDialog("Logowanie", "Błędne hasło!");
                     }
                     counter++;
                 }
            if(counter == 0) {
-               Alert alert = new Alert(Alert.AlertType.INFORMATION);
-               alert.setTitle("Logowanie");
-               alert.setContentText("Użytkownik nie istnieje");
-               alert.showAndWait();
+               Utils.openDialog("Logowanie", "Użytkownik nie istnieje.");
            }
+           statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
