@@ -1,11 +1,19 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -42,9 +50,17 @@ public class Controller implements Initializable {
 //        System.out.println("Ktoś wyłączył okno (anuluował)");
 //    }
 
+    public String getPassword() {
+        return passwordText.getText().trim();
+    }
+
+    public String getLogin() {
+        return loginText.getText().trim();
+    }
+
 
     private boolean isLoginFormValid() {
-        if(loginText.getText().trim().length() < 4 || passwordText.getText().trim().length() < 4){
+        if(getLogin().length() < 4 || getPassword().length() < 4){
             Utils.openDialog("Logowanie", "Login i hasło muszą mieć minimum 4 znaki");
             return false;
         }
@@ -53,7 +69,7 @@ public class Controller implements Initializable {
     }
 
 
-    public void openDialog() {
+    public void openDialog(MouseEvent event) throws IOException {
         if(!isLoginFormValid()){
             return;
         }
@@ -68,6 +84,15 @@ public class Controller implements Initializable {
                 while (resultSet.next()) {
                     String passwordFromDatabase = resultSet.getString("password");
                     if(passwordFromDatabase.equals(passwordText.getText())){
+
+                        Parent mainPage = FXMLLoader.load(getClass().getResource("main.fxml"));
+                        Scene scene = new Scene(mainPage);
+                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+                        stage.hide();
+                        stage.setScene(scene);
+                        stage.show();
+
                         Utils.openDialog("Logowanie", "Zalogowałeś się poprawnie!");
                     }else{
                         Utils.openDialog("Logowanie", "Błędne hasło!");
@@ -83,6 +108,27 @@ public class Controller implements Initializable {
         }
     }
 
+
+    public void register() {
+
+        try {
+            String sql = "INSERT INTO user(name, lastname, password, number) VALUES(?, ?, ?, ?)";
+            PreparedStatement statement = MySqlConnector.getInstance().getConnection().prepareStatement(sql);
+            statement.setString(1, "oskarx");
+            statement.setString(2, "Kowalski");
+            statement.setString(3, "10135886");
+            statement.setString(4, "722277722");
+
+            statement.execute();
+            statement.close();
+
+            //////////
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

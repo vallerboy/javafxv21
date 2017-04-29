@@ -1,9 +1,6 @@
 package sample;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * Created by OskarPraca on 2017-04-26.
@@ -11,7 +8,7 @@ import java.sql.Statement;
 public class MySqlConnector {
 
 
-    private static final String DB = "jdbc:mysql://localhost:3306/oskar?useUnicode=true&characterEncoding=UTF-8";
+    private static final String DB = "jdbc:mysql://5.135.218.27:3306/oskar?useUnicode=true&characterEncoding=UTF-8";
     private static final String USER = "oskar";
     private static final String USERPW = "10135886";
     private static final String DRIVER = "com.mysql.jdbc.Driver";
@@ -55,4 +52,7 @@ public class MySqlConnector {
         }
         return null;
     }
+
+
+
 }
