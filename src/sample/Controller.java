@@ -57,6 +57,7 @@ public class Controller implements Initializable {
         if(!isLoginFormValid()){
             return;
         }
+
         System.out.println("Login: " + loginText.getText() + " Hasło: " + passwordText.getText());
         Statement statement = MySqlConnector.getInstance().getNewStatement();
         try {
