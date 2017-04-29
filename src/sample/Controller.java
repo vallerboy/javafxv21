@@ -83,7 +83,7 @@ public class Controller implements Initializable {
 
                 while (resultSet.next()) {
                     String passwordFromDatabase = resultSet.getString("password");
-                    if(passwordFromDatabase.equals(passwordText.getText())){
+                    if(passwordFromDatabase.equals(Utils.hashPassword(passwordText.getText()))){
 
                         Parent mainPage = FXMLLoader.load(getClass().getResource("main.fxml"));
                         Scene scene = new Scene(mainPage);

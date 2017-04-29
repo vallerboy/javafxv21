@@ -2,6 +2,11 @@ package sample;
 
 import javafx.scene.control.Alert;
 
+import javax.xml.bind.DatatypeConverter;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 /**
  * Created by OskarPraca on 2017-04-26.
  */
@@ -12,5 +17,18 @@ public class Utils {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public static String hashPassword(String password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashArray = digest.digest(password.getBytes("UTF-8"));
+            return DatatypeConverter.printHexBinary(hashArray);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
